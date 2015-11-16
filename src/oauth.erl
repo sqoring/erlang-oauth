@@ -137,12 +137,7 @@ hmac_sha1_verify(Signature, BaseString, Consumer, TokenSecret) ->
   verify_in_constant_time(Signature, hmac_sha1_signature(BaseString, Consumer, TokenSecret)).
 
 hmac_sha(Key, Data) ->
-  case erlang:function_exported(crypto, hmac, 3) of
-    true ->
-      crypto:hmac(sha, Key, Data);
-    false ->
-      crypto:sha_mac(Key, Data)
-  end.
+      crypto:hmac(sha, Key, Data).
 
 rsa_sha1_signature(HttpMethod, URL, Params, Consumer) ->
   BaseString = signature_base_string(HttpMethod, URL, Params),
